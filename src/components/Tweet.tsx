@@ -13,28 +13,29 @@ function Tweet(props) {
   const user = useSelector((state: { user: UserState }) => state.user.value);
 
   const handleLike = () => {
-    fetch("http://localhost:3000/tweets/like", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token, tweetId: props._id }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        data.result &&
-          dispatch(likeTweet({ tweetId: props._id, username: user.username }));
-      });
+    // fetch("http://localhost:3000/tweets/like", {
+    //   method: "PUT",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ token: user.token, tweetId: props._id }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     data.result &&
+    dispatch(likeTweet({ tweetId: props._id, username: user.username }));
+    // });
   };
 
   const handleDelete = () => {
-    fetch("http://localhost:3000/tweets", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token, tweetId: props._id }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        data.result && dispatch(deleteTweet(props._id));
-      });
+    // fetch("http://localhost:3000/tweets", {
+    //   method: "DELETE",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ token: user.token, tweetId: props._id }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     data.result &&
+    dispatch(deleteTweet(props._id));
+    // });
   };
 
   let likeStyle = {};

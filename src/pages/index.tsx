@@ -49,21 +49,33 @@ const Home: NextPage = () => {
     }
   };
 
+  // Ajout tweet provisoir, à remplacer par code en dessous avec BDD //
+
   const handleSubmit = () => {
-    fetch("http://localhost:3000/tweets", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token, content: newTweet }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          const createdTweet = { ...data.tweet, author: user };
-          dispatch(addTweet(createdTweet));
-          setNewTweet("");
-        }
-      });
+    const createdTweet = {
+      author: { firstName: user.firstName, username: user.username },
+      content: newTweet,
+      createdAt: new Date(),
+      likes: [],
+    };
+    dispatch(addTweet(createdTweet));
   };
+
+  // const handleSubmit = () => {
+  //   fetch("http://localhost:3000/tweets", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ token: user.token, content: newTweet }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.result) {
+  //         const createdTweet = { ...data.tweet, author: user };
+  //         dispatch(addTweet(createdTweet));
+  //         setNewTweet("");
+  //       }
+  //     });
+  // };
 
   return (
     <div className={styles.container}>
@@ -111,7 +123,6 @@ const Home: NextPage = () => {
         <h2 className={styles.title}>Home</h2>
         <div className={styles.createSection}>
           <textarea
-            type="text"
             placeholder="What's up?"
             className={styles.input}
             onChange={(e) => handleInputChange(e)}
